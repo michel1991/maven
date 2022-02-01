@@ -33,6 +33,10 @@ under the License.
   <name>Maven Compat</name>
   <description>Maven2 classes maintained as compatibility layer.</description>
 
+  <properties>
+    <wagonVersion>3.5.1</wagonVersion>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>org.apache.maven</groupId>
@@ -98,9 +102,37 @@ under the License.
       <groupId>org.codehaus.plexus</groupId>
       <artifactId>plexus-component-annotations</artifactId>
     </dependency>
+
+    <!-- Wagon -->
     <dependency>
       <groupId>org.apache.maven.wagon</groupId>
       <artifactId>wagon-provider-api</artifactId>
+      <version>${wagonVersion}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven.wagon</groupId>
+      <artifactId>wagon-http</artifactId>
+      <version>${wagonVersion}</version>
+      <classifier>shaded</classifier>
+      <exclusions>
+        <exclusion>
+          <groupId>org.apache.httpcomponents</groupId>
+          <artifactId>httpclient</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.apache.httpcomponents</groupId>
+          <artifactId>httpcore</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.apache.maven.wagon</groupId>
+          <artifactId>wagon-http-shared</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven.wagon</groupId>
+      <artifactId>wagon-file</artifactId>
+      <version>${wagonVersion}</version>
     </dependency>
 
     <dependency>
@@ -111,11 +143,6 @@ under the License.
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-core</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.maven.wagon</groupId>
-      <artifactId>wagon-file</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
